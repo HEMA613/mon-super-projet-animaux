@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}À propos{% endblock %}
+
+{% block content %}
+<h1>À propos</h1>
+<p>Site créé avec Django pendant le cours.</p>
+<p>
+    Les articles, catégories et commentaires sont enregistrés en base de données
+    et se gèrent depuis <a href="{% url 'admin:index' %}">l'administration</a>.
+</p>
+{% endblock %}
