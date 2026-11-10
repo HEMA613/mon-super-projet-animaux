@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}{{ animal.nom }} — Super Animaux{% endblock %}
+
+{% block content %}
+<article class="fiche">
+    <p class="badge">{{ animal.get_espece_display }}</p>
+    <h1>{{ animal.nom }}</h1>
+    <p class="meta">{{ animal.race }}</p>
+    <ul class="facts">
+        <li><span>Sexe</span> {{ animal.get_sexe_display }}</li>
+        <li><span>Taille</span> {{ animal.taille }}</li>
+        <li><span>Couleur</span> {{ animal.couleur }}</li>
+        <li><span>Situation</span> {{ animal.get_situation_display }}</li>
+    </ul>
+    <p><a class="btn" href="{% url 'blog:animal_list' %}">Retour aux annonces</a></p>
+</article>
+{% endblock %}

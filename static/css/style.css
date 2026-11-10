@@ -1,114 +1,339 @@
+:root {
+    --corail: #f26b4a;
+    --corail-fonce: #d45334;
+    --encre: #2b211c;
+    --muted: #7a655c;
+    --creme: #fff6f1;
+    --carte: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
 body {
-    font-family: system-ui, sans-serif;
+    font-family: "Segoe UI", system-ui, sans-serif;
     margin: 0;
-    color: #1f2330;
-    background: #f6f7f9;
+    color: var(--encre);
+    background: var(--creme);
     line-height: 1.5;
 }
 
-header {
+header,
+footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem 2rem;
-    background: #0c4b33;
+    gap: 1rem;
+    padding: 1rem 6vw;
+    background: white;
 }
 
-header a {
-    color: white;
+header {
+    position: sticky;
+    top: 0;
+    border-bottom: 1px solid #f3e4dc;
+}
+
+header a,
+footer a {
+    color: var(--encre);
     text-decoration: none;
     font-weight: 600;
 }
 
-header nav {
+header nav,
+footer nav {
     display: flex;
-    gap: 1.25rem;
+    flex-wrap: wrap;
+    gap: 1.1rem;
+    align-items: center;
 }
 
 .logo {
-    font-size: 1.2rem;
+    color: var(--corail);
+    font-size: 1.25rem;
+}
+
+.nav-admin {
+    color: var(--muted);
+    font-weight: 500;
 }
 
 main {
-    max-width: 760px;
-    margin: 0 auto;
-    padding: 2rem;
+    padding: 0 6vw 4rem;
 }
 
-a {
-    color: #0c4b33;
+.hero {
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: 2rem;
+    align-items: center;
+    padding: 3.5rem 0 2rem;
 }
 
-.meta {
-    color: #6b7280;
-    font-size: 0.9rem;
+.eyebrow {
+    color: var(--corail);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: 0.8rem;
 }
 
-.card,
-.comment,
-.empty {
+h1 {
+    font-size: clamp(2.2rem, 4vw, 3.4rem);
+    line-height: 1.1;
+    margin: 0.2rem 0 0.8rem;
+}
+
+.lead {
+    font-size: 1.1rem;
+    max-width: 38rem;
+    color: var(--muted);
+}
+
+.actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.btn,
+button {
+    display: inline-block;
+    padding: 0.7rem 1.15rem;
+    border: 0;
+    border-radius: 999px;
+    background: var(--corail);
+    color: white;
+    font: inherit;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn:hover,
+button:hover {
+    background: var(--corail-fonce);
+}
+
+.btn-ghost {
     background: white;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    padding: 1rem 1.25rem;
-    margin-bottom: 1rem;
+    color: var(--corail);
+    border: 1px solid #f3c3b4;
 }
 
-.card h2 {
+.hero-card {
+    background: white;
+    border-radius: 28px;
+    min-height: 220px;
+    padding: 1.5rem;
+    box-shadow: 0 20px 50px rgba(242, 107, 74, 0.12);
+}
+
+.hero-card p {
+    color: var(--corail);
+    font-weight: 700;
+    margin-top: 0;
+}
+
+.section-head,
+.page-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 1rem;
+}
+
+.page-head {
+    padding-top: 2rem;
+    display: block;
+}
+
+.species,
+.grid {
+    display: grid;
+    gap: 1rem;
+}
+
+.species {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.species a,
+.card,
+.empty,
+.fiche {
+    background: var(--carte);
+    border-radius: 18px;
+    padding: 1.1rem 1.25rem;
+}
+
+.species a {
+    text-decoration: none;
+    color: var(--encre);
+    font-weight: 700;
+    font-size: 1.15rem;
+    border: 1px solid #f6e2d8;
+}
+
+.species a:hover,
+.card:hover {
+    border-color: var(--corail);
+}
+
+.grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+
+.card h2,
+.fiche h1 {
+    margin: 0.3rem 0;
+}
+
+.card a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.meta,
+.note {
+    color: var(--muted);
+}
+
+.badge {
+    display: inline-block;
     margin: 0;
+    padding: 0.15rem 0.6rem;
+    border-radius: 999px;
+    background: #ffe8e1;
+    color: var(--corail-fonce);
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.steps ol,
+ol.steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    padding: 0;
+    list-style: none;
+}
+
+.steps li,
+.steps-page li {
+    background: white;
+    border-radius: 18px;
+    padding: 1rem 1.1rem;
 }
 
 .search {
     display: flex;
     gap: 0.5rem;
-    margin-bottom: 1rem;
+    margin: 1rem 0;
 }
 
 input,
-textarea {
-    width: 100%;
-    padding: 0.5rem;
-    border: 1px solid #d1d5db;
-    border-radius: 6px;
+select {
+    flex: 1;
+    padding: 0.7rem 0.9rem;
+    border: 1px solid #f0d5cb;
+    border-radius: 999px;
     font: inherit;
-    box-sizing: border-box;
 }
 
-button {
-    padding: 0.5rem 1rem;
-    border: 0;
-    border-radius: 6px;
-    background: #0c4b33;
-    color: white;
-    font: inherit;
-    cursor: pointer;
+.animal-form {
+    max-width: 560px;
+    margin: 1.5rem 0;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 18px;
+}
+
+.form-field {
+    display: grid;
+    gap: 0.35rem;
+    margin-bottom: 1rem;
+}
+
+.form-field input,
+.form-field select {
+    width: 100%;
+}
+
+.errorlist {
+    margin: 0;
+    padding-left: 1.2rem;
+    color: #a32121;
 }
 
 .tags a {
     display: inline-block;
-    padding: 0.2rem 0.75rem;
-    margin: 0 0.25rem 0.5rem 0;
+    margin: 0 0.4rem 1rem 0;
+    padding: 0.35rem 0.85rem;
     border-radius: 999px;
-    background: #e5e7eb;
+    background: white;
     text-decoration: none;
+    color: var(--encre);
+    border: 1px solid #f0d5cb;
 }
 
 .tags a.active {
-    background: #0c4b33;
+    background: var(--corail);
     color: white;
+    border-color: var(--corail);
 }
 
-.messages {
-    list-style: none;
+.facts {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
     padding: 0;
+    list-style: none;
 }
 
-.messages li {
-    padding: 0.75rem 1rem;
-    border-radius: 6px;
-    background: #dcfce7;
+.facts li {
+    background: white;
+    border-radius: 14px;
+    padding: 0.7rem 1rem;
 }
 
-.errorlist {
-    color: #b91c1c;
+.facts span {
+    display: block;
+    color: var(--muted);
+    font-size: 0.8rem;
+}
+
+.fiche {
+    max-width: 720px;
+    margin-top: 2rem;
+}
+
+footer {
+    align-items: start;
+    border-top: 1px solid #f3e4dc;
+    color: var(--muted);
+}
+
+@media (max-width: 800px) {
+    header,
+    footer,
+    .hero,
+    .species,
+    .steps ol,
+    ol.steps {
+        display: block;
+    }
+
+    header nav,
+    footer nav {
+        margin-top: 0.8rem;
+    }
+
+    .hero-card,
+    .species a,
+    .steps li {
+        margin-bottom: 0.8rem;
+    }
 }

@@ -1,5 +1,5 @@
 """
-Routes du projet : l'admin de Django et les pages de l'application blog.
+Routes du projet : l'admin de Django et les pages du site d'adoption.
 
 Documentation : https://docs.djangoproject.com/fr/5.2/topics/http/urls/
 """

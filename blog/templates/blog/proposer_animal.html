@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Proposer un animal à l'adoption{% endblock %}
+
+{% block content %}
+<section class="page-head">
+    <h1>Proposer un animal</h1>
+    <p>Renseigne quelques informations pour ajouter un chien ou un chat à la liste.</p>
+</section>
+
+<form method="post" class="animal-form">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {% for field in form %}
+    <div class="form-field">
+        {{ field.label_tag }}
+        {{ field }}
+        {{ field.errors }}
+    </div>
+    {% endfor %}
+    <button type="submit">Enregistrer l'annonce</button>
+</form>
+{% endblock %}

@@ -3,10 +3,15 @@
 {% block title %}À propos{% endblock %}
 
 {% block content %}
-<h1>À propos</h1>
-<p>Site créé avec Django pendant le cours.</p>
+<section class="page-head">
+    <h1>À propos</h1>
+    <p>
+        Super Animaux est un petit site pour consulter et proposer des chiens
+        et des chats à l'adoption.
+    </p>
+</section>
 <p>
-    Les articles, catégories et commentaires sont enregistrés en base de données
+    Les fiches (nom, espèce, taille, couleur, race et sexe) sont enregistrées en base
     et se gèrent depuis <a href="{% url 'admin:index' %}">l'administration</a>.
 </p>
 {% endblock %}

@@ -1,0 +1,7 @@
+<article class="card animal-card animal-{{ animal.espece }}">
+    <p class="badge">{{ animal.get_espece_display }}</p>
+    <h2><a href="{{ animal.get_absolute_url }}">{{ animal.nom }}</a></h2>
+    <p class="meta">{{ animal.race }} · {{ animal.couleur }}</p>
+    <p>{{ animal.taille }} · {{ animal.get_sexe_display }}</p>
+    <p>{{ animal.get_situation_display }}</p>
+</article>

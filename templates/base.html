@@ -4,29 +4,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}Mon blog{% endblock %}</title>
+    <title>{% block title %}Super Animaux{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
     <header>
-        <a class="logo" href="{% url 'blog:article_list' %}">Mon blog</a>
+        <a class="logo" href="{% url 'blog:accueil' %}">Super Animaux</a>
         <nav>
-            <a href="{% url 'blog:article_list' %}">Articles</a>
+            <a href="{% url 'blog:animal_list' %}">Adopter</a>
+            <a href="{% url 'blog:proposer_animal' %}">Proposer un animal</a>
+            <a href="{% url 'blog:comment_ca_marche' %}">Comment ça marche</a>
             <a href="{% url 'blog:about' %}">À propos</a>
-            <a href="{% url 'admin:index' %}">Administration</a>
+            <a class="nav-admin" href="{% url 'admin:index' %}">Admin</a>
         </nav>
     </header>
 
     <main>
-        {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-            <li class="{{ message.tags }}">{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-
         {% block content %}{% endblock %}
     </main>
+
+    <footer>
+        <div>
+            <strong>Super Animaux</strong>
+            <p>Des fiches simples pour les chiens et les chats à adopter.</p>
+        </div>
+        <nav>
+            <a href="{% url 'blog:animal_list' %}?espece=chien">Chiens</a>
+            <a href="{% url 'blog:animal_list' %}?espece=chat">Chats</a>
+            <a href="{% url 'blog:proposer_animal' %}">Proposer un animal</a>
+            <a href="{% url 'blog:comment_ca_marche' %}">Comment ça marche</a>
+        </nav>
+    </footer>
 </body>
 </html>

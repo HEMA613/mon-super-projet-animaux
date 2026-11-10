@@ -1,52 +1,86 @@
-from django.contrib import messages
+from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 
-from .forms import CommentaireForm
-from .models import Article, Categorie
+from .forms import AnimalForm
+from .models import Animal
 
 
-def article_list(request):
-    """Accueil : articles publies, avec recherche et filtre par categorie."""
-    articles = Article.objects.filter(publie=True).select_related("categorie")
-
+def _filtrer_animaux(request):
+    """Animaux disponibles, filtrés par recherche et par espèce."""
+    animaux = Animal.objects.filter(
+        disponible=True, espece__in=dict(Animal.ESPECES)
+    )
     recherche = request.GET.get("q", "").strip()
     if recherche:
-        articles = articles.filter(titre__icontains=recherche)
+        animaux = animaux.filter(
+            Q(nom__icontains=recherche)
+            | Q(race__icontains=recherche)
+            | Q(couleur__icontains=recherche)
+        )
 
-    categorie = None
-    categorie_id = request.GET.get("categorie")
-    if categorie_id:
-        categorie = get_object_or_404(Categorie, pk=categorie_id)
-        articles = articles.filter(categorie=categorie)
+    espece = request.GET.get("espece", "")
+    if espece not in dict(Animal.ESPECES):
+        espece = ""
+    if espece:
+        animaux = animaux.filter(espece=espece)
 
+    situation = request.GET.get("situation", "")
+    if situation not in dict(Animal.SITUATIONS):
+        situation = ""
+    if situation:
+        animaux = animaux.filter(situation=situation)
+
+    return animaux, recherche, espece, situation
+
+
+def accueil(request):
+    """Page d'accueil : promesse du site et quelques animaux à adopter."""
+    animaux = Animal.objects.filter(
+        disponible=True, espece__in=dict(Animal.ESPECES)
+    )[:6]
+    return render(request, "blog/accueil.html", {"animaux": animaux})
+
+
+def animal_list(request):
+    """Toutes les annonces, avec recherche et filtres."""
+    animaux, recherche, espece, situation = _filtrer_animaux(request)
     return render(
         request,
-        "blog/article_list.html",
+        "blog/animal_list.html",
         {
-            "articles": articles,
-            "categories": Categorie.objects.all(),
-            "categorie": categorie,
+            "animaux": animaux,
             "recherche": recherche,
+            "espece": espece,
+            "especes": Animal.ESPECES,
+            "situation": situation,
+            "situations": Animal.SITUATIONS,
         },
     )
 
 
-def article_detail(request, pk):
-    """Un article, ses commentaires et le formulaire pour en ajouter un."""
-    article = get_object_or_404(Article, pk=pk, publie=True)
+def animal_detail(request, pk):
+    """Fiche d'un animal disponible."""
+    animal = get_object_or_404(
+        Animal, pk=pk, disponible=True, espece__in=dict(Animal.ESPECES)
+    )
+    return render(request, "blog/animal_detail.html", {"animal": animal})
 
+
+def proposer_animal(request):
+    """Enregistre la proposition d'un animal par son propriétaire."""
     if request.method == "POST":
-        form = CommentaireForm(request.POST)
+        form = AnimalForm(request.POST)
         if form.is_valid():
-            commentaire = form.save(commit=False)
-            commentaire.article = article
-            commentaire.save()
-            messages.success(request, "Merci, ton commentaire est publié !")
-            return redirect(article)
+            animal = form.save()
+            return redirect(animal)
     else:
-        form = CommentaireForm()
+        form = AnimalForm()
 
-    return render(request, "blog/article_detail.html", {"article": article, "form": form})
+    return render(request, "blog/proposer_animal.html", {"form": form})
+
+
+def comment_ca_marche(request):
+    return render(request, "blog/comment_ca_marche.html")
 
 
 def about(request):

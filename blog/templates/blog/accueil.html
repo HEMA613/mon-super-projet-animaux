@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Super Animaux — Adoption de chiens et chats{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div>
+        <p class="eyebrow">Annonces de refuges</p>
+        <h1>Trouve le compagnon qui t'attend.</h1>
+        <p class="lead">
+            Découvre des chiens et des chats à adopter, ou propose ton animal
+            à l'adoption.
+        </p>
+        <p class="actions">
+            <a class="btn" href="{% url 'blog:animal_list' %}">Voir les animaux</a>
+            <a class="btn btn-ghost" href="{% url 'blog:proposer_animal' %}">Proposer un animal</a>
+            <a class="btn btn-ghost" href="{% url 'blog:comment_ca_marche' %}">Comment ça marche</a>
+        </p>
+    </div>
+    <div class="hero-card">
+        <p>Adoption accompagnée</p>
+        <strong>Une fiche claire pour chaque animal.</strong>
+    </div>
+</section>
+
+<section>
+    <h2>Par espèce</h2>
+    <div class="species">
+        <a href="{% url 'blog:animal_list' %}?espece=chien">Chiens</a>
+        <a href="{% url 'blog:animal_list' %}?espece=chat">Chats</a>
+    </div>
+</section>
+
+<section>
+    <div class="section-head">
+        <h2>Ils cherchent une famille</h2>
+        <a href="{% url 'blog:animal_list' %}">Toutes les annonces</a>
+    </div>
+    <div class="grid">
+        {% for animal in animaux %}
+        {% include "blog/_carte_animal.html" %}
+        {% empty %}
+        <div class="empty">
+            <p>Aucun animal pour l'instant.</p>
+            <p>
+                Ajoute-en depuis <a href="{% url 'admin:blog_animal_add' %}">l'administration</a>.
+            </p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="steps">
+    <h2>Simple, de la fiche à la rencontre</h2>
+    <ol>
+        <li>
+            <strong>1. Choisis</strong>
+            <p>Filtre par espèce, race ou couleur.</p>
+        </li>
+        <li>
+            <strong>2. Lis la fiche</strong>
+            <p>Âge, sexe, caractère : tout est écrit noir sur blanc.</p>
+        </li>
+        <li>
+            <strong>3. Rencontre</strong>
+            <p>Le refuge organise la visite avant toute adoption.</p>
+        </li>
+    </ol>
+</section>
+{% endblock %}

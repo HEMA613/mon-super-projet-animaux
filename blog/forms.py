@@ -1,10 +1,17 @@
 from django import forms
 
-from .models import Commentaire
+from .models import Animal
 
 
-class CommentaireForm(forms.ModelForm):
+class AnimalForm(forms.ModelForm):
     class Meta:
-        model = Commentaire
-        fields = ["auteur", "texte"]
-        widgets = {"texte": forms.Textarea(attrs={"rows": 3})}
+        model = Animal
+        fields = [
+            "nom",
+            "espece",
+            "taille",
+            "couleur",
+            "race",
+            "sexe",
+            "situation",
+        ]
