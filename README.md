@@ -3,7 +3,7 @@
 Super Animaux est une petite application Django pour consulter des chiens et des chats
 proposés à l'adoption, ou ajouter un animal à la liste.
 
-Chaque annonce enregistre le nom, l'espèce, la taille, la couleur, la race et le sexe.
+Chaque annonce enregistre le nom, l'espèce, la taille, la couleur, la race, le sexe et une photo.
 Elle précise aussi si l'animal est abandonné ou proposé par son propriétaire.
 Les annonces sont enregistrées dans la base SQLite du projet.
 
@@ -15,7 +15,8 @@ Les annonces sont enregistrées dans la base SQLite du projet.
 - `/proposer/` : enregistrer une annonce pour un chien ou un chat
 - `/admin/` : gérer les animaux avec l'administration Django
 
-Les annonces proposées depuis le formulaire sont publiées directement. Pour retirer une
+Choisis une photo parmi les images disponibles dans `refuge-animaux/images` quand tu proposes
+un animal. Les annonces proposées depuis le formulaire sont publiées directement. Pour retirer une
 annonce, l'administrateur peut décocher « disponible à l'adoption » dans l'administration.
 
 ## Installation sur Windows

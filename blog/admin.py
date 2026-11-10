@@ -12,6 +12,7 @@ class AnimalAdmin(admin.ModelAdmin):
         "couleur",
         "race",
         "sexe",
+        "image",
         "situation",
         "disponible",
     ]

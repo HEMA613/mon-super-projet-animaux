@@ -1,4 +1,8 @@
+{% load static %}
 <article class="card animal-card animal-{{ animal.espece }}">
+    <a href="{{ animal.get_absolute_url }}">
+        <img src="{% static animal.image %}" alt="{{ animal.nom }}">
+    </a>
     <p class="badge">{{ animal.get_espece_display }}</p>
     <h2><a href="{{ animal.get_absolute_url }}">{{ animal.nom }}</a></h2>
     <p class="meta">{{ animal.race }} · {{ animal.couleur }}</p>

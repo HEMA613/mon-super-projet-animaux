@@ -1,9 +1,11 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}{{ animal.nom }} — Super Animaux{% endblock %}
 
 {% block content %}
 <article class="fiche">
+    <img class="animal-photo" src="{% static animal.image %}" alt="{{ animal.nom }}">
     <p class="badge">{{ animal.get_espece_display }}</p>
     <h1>{{ animal.nom }}</h1>
     <p class="meta">{{ animal.race }}</p>

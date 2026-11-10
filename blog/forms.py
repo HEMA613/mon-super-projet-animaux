@@ -13,5 +13,6 @@ class AnimalForm(forms.ModelForm):
             "couleur",
             "race",
             "sexe",
+            "image",
             "situation",
         ]
