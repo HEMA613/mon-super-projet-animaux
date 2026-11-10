@@ -1,3 +1,5 @@
+"""Réglage de la page d'administration des animaux."""
+
 from django.contrib import admin
 
 from .models import Animal
@@ -5,6 +7,8 @@ from .models import Animal
 
 @admin.register(Animal)
 class AnimalAdmin(admin.ModelAdmin):
+    """Colonnes, filtres et recherche dans /admin/."""
+
     list_display = [
         "nom",
         "espece",

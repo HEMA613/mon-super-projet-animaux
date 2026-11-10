@@ -4,17 +4,24 @@
 {% block title %}{{ animal.nom }} — Super Animaux{% endblock %}
 
 {% block content %}
+
+<!-- ===== FICHE D'UN SEUL ANIMAL ===== -->
 <article class="fiche">
+    <!-- La photo vient du dossier static/asset -->
     <img class="animal-photo" src="{% static animal.image %}" alt="{{ animal.nom }}">
     <p class="badge">{{ animal.get_espece_display }}</p>
     <h1>{{ animal.nom }}</h1>
     <p class="meta">{{ animal.race }}</p>
+
+    <!-- Les infos enregistrees en base -->
     <ul class="facts">
         <li><span>Sexe</span> {{ animal.get_sexe_display }}</li>
         <li><span>Taille</span> {{ animal.taille }}</li>
         <li><span>Couleur</span> {{ animal.couleur }}</li>
         <li><span>Situation</span> {{ animal.get_situation_display }}</li>
     </ul>
+
     <p><a class="btn" href="{% url 'blog:animal_list' %}">Retour aux annonces</a></p>
 </article>
+
 {% endblock %}

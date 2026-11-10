@@ -1,8 +1,12 @@
 {% extends "base.html" %}
+{% load static %}
 
+<!-- Titre de l'onglet du navigateur -->
 {% block title %}Super Animaux — Adoption de chiens et chats{% endblock %}
 
 {% block content %}
+
+<!-- ===== BANNIERE : le message principal ===== -->
 <section class="hero">
     <div>
         <p class="eyebrow">Annonces de refuges</p>
@@ -11,18 +15,26 @@
             Découvre des chiens et des chats à adopter, ou propose ton animal
             à l'adoption.
         </p>
+        <!-- Trois boutons vers les autres pages -->
         <p class="actions">
             <a class="btn" href="{% url 'blog:animal_list' %}">Voir les animaux</a>
             <a class="btn btn-ghost" href="{% url 'blog:proposer_animal' %}">Proposer un animal</a>
             <a class="btn btn-ghost" href="{% url 'blog:comment_ca_marche' %}">Comment ça marche</a>
         </p>
     </div>
+    <!-- Photo prise dans le dossier static/asset -->
     <div class="hero-card">
+        <img
+            class="hero-photo"
+            src="{% static 'asset/chien2.jpg' %}"
+            alt="Un chien qui cherche une famille"
+        >
         <p>Adoption accompagnée</p>
         <strong>Une fiche claire pour chaque animal.</strong>
     </div>
 </section>
 
+<!-- ===== LIENS RAPIDES : chiens ou chats ===== -->
 <section>
     <h2>Par espèce</h2>
     <div class="species">
@@ -31,6 +43,7 @@
     </div>
 </section>
 
+<!-- ===== APERCU : les 6 premiers animaux envoyes par la vue ===== -->
 <section>
     <div class="section-head">
         <h2>Ils cherchent une famille</h2>
@@ -38,18 +51,21 @@
     </div>
     <div class="grid">
         {% for animal in animaux %}
-        {% include "blog/_carte_animal.html" %}
+            <!-- Une carte par animal (fichier a part) -->
+            {% include "blog/_carte_animal.html" %}
         {% empty %}
-        <div class="empty">
-            <p>Aucun animal pour l'instant.</p>
-            <p>
-                Ajoute-en depuis <a href="{% url 'admin:blog_animal_add' %}">l'administration</a>.
-            </p>
-        </div>
+            <!-- Ce bloc s'affiche seulement si la liste est vide -->
+            <div class="empty">
+                <p>Aucun animal pour l'instant.</p>
+                <p>
+                    Ajoute-en depuis <a href="{% url 'admin:blog_animal_add' %}">l'administration</a>.
+                </p>
+            </div>
         {% endfor %}
     </div>
 </section>
 
+<!-- ===== LES 3 ETAPES ===== -->
 <section class="steps">
     <h2>Simple, de la fiche à la rencontre</h2>
     <ol>
@@ -59,7 +75,7 @@
         </li>
         <li>
             <strong>2. Lis la fiche</strong>
-            <p>Âge, sexe, caractère : tout est écrit noir sur blanc.</p>
+            <p>Taille, sexe, couleur : tout est écrit noir sur blanc.</p>
         </li>
         <li>
             <strong>3. Rencontre</strong>
@@ -67,4 +83,5 @@
         </li>
     </ol>
 </section>
+
 {% endblock %}

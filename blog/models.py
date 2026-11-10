@@ -1,11 +1,15 @@
+"""Le modèle Animal : une fiche d'adoption enregistrée en base."""
+
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.urls import reverse
 
 
 class Animal(models.Model):
-    """Représente un animal proposé à l'adoption."""
+    """Un chien ou un chat proposé à l'adoption."""
 
+    # Listes de choix. Le premier mot est enregistré en base,
+    # le second est le texte affiché à l'écran.
     ESPECES = [
         ("chien", "Chien"),
         ("chat", "Chat"),
@@ -18,19 +22,22 @@ class Animal(models.Model):
         ("abandonne", "Animal abandonné"),
         ("cession", "Proposé par son propriétaire"),
     ]
+
+    # Chemins des photos, relatifs au dossier static/.
+    # Les fichiers sont dans static/asset/.
     IMAGES_CHIENS = [
-        ("images/chien1.avif", "Chien 1"),
-        ("images/chien2.jpg", "Chien 2"),
-        ("images/chien3.jpg", "Chien 3"),
-        ("images/chien4.jpg", "Chien 4"),
-        ("images/chien5.jpg", "Chien 5"),
-        ("images/chien6.jpg", "Chien 6"),
+        ("asset/chien1.avif", "Chien 1"),
+        ("asset/chien2.jpg", "Chien 2"),
+        ("asset/chien3.jpg", "Chien 3"),
+        ("asset/chien4.jpg", "Chien 4"),
+        ("asset/chien5.jpg", "Chien 5"),
+        ("asset/chien6.jpg", "Chien 6"),
     ]
     IMAGES_CHATS = [
-        ("images/car1.jpg", "Chat 1 (car1.jpg)"),
-        ("images/cat2.jpg", "Chat 2"),
-        ("images/cat3.webp", "Chat 3"),
-        ("images/cat4.webp", "Chat 4"),
+        ("asset/car1.jpg", "Chat 1"),
+        ("asset/cat2.jpg", "Chat 2"),
+        ("asset/cat3.webp", "Chat 3"),
+        ("asset/cat4.webp", "Chat 4"),
     ]
     IMAGES = [*IMAGES_CHIENS, *IMAGES_CHATS]
 
@@ -42,7 +49,10 @@ class Animal(models.Model):
     sexe = models.CharField("sexe", max_length=20, choices=SEXES)
     image = models.CharField("image", max_length=100, choices=IMAGES)
     situation = models.CharField(
-        "situation", max_length=20, choices=SITUATIONS, default="abandonne"
+        "situation",
+        max_length=20,
+        choices=SITUATIONS,
+        default="abandonne",
     )
     disponible = models.BooleanField("disponible à l'adoption", default=True)
 
@@ -52,13 +62,15 @@ class Animal(models.Model):
         verbose_name_plural = "animaux"
 
     def __str__(self):
+        """Texte utilisé dans l'admin et les listes déroulantes."""
         return self.nom
 
     def clean(self):
+        """Refuse une photo de chien sur un chat, et l'inverse."""
         super().clean()
         images_par_espece = {
-            "chien": {image for image, _ in self.IMAGES_CHIENS},
-            "chat": {image for image, _ in self.IMAGES_CHATS},
+            "chien": {chemin for chemin, _label in self.IMAGES_CHIENS},
+            "chat": {chemin for chemin, _label in self.IMAGES_CHATS},
         }
         if self.image and self.espece in images_par_espece:
             if self.image not in images_par_espece[self.espece]:
@@ -67,4 +79,5 @@ class Animal(models.Model):
                 )
 
     def get_absolute_url(self):
+        """Adresse de la fiche de cet animal."""
         return reverse("blog:animal_detail", args=[self.pk])

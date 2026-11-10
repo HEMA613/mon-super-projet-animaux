@@ -3,21 +3,30 @@
 {% block title %}Proposer un animal à l'adoption{% endblock %}
 
 {% block content %}
+
+<!-- ===== TITRE ===== -->
 <section class="page-head">
     <h1>Proposer un animal</h1>
     <p>Renseigne quelques informations pour ajouter un chien ou un chat à la liste.</p>
 </section>
 
+<!-- ===== FORMULAIRE ===== -->
+<!-- method="post" envoie les reponses au serveur -->
+<!-- csrf_token protege le formulaire (obligatoire avec Django) -->
 <form method="post" class="animal-form">
     {% csrf_token %}
     {{ form.non_field_errors }}
+
+    <!-- Une ligne par champ du formulaire AnimalForm -->
     {% for field in form %}
-    <div class="form-field">
-        {{ field.label_tag }}
-        {{ field }}
-        {{ field.errors }}
-    </div>
+        <div class="form-field">
+            {{ field.label_tag }}
+            {{ field }}
+            {{ field.errors }}
+        </div>
     {% endfor %}
+
     <button type="submit">Enregistrer l'annonce</button>
 </form>
+
 {% endblock %}

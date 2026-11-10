@@ -17,9 +17,9 @@ class AnimalTests(TestCase):
         donnees.update(overrides)
         if "image" not in donnees:
             donnees["image"] = (
-                "images/cat2.jpg"
+                "asset/cat2.jpg"
                 if donnees["espece"] == "chat"
-                else "images/chien1.avif"
+                else "asset/chien1.avif"
             )
         return Animal.objects.create(**donnees)
 
@@ -33,12 +33,12 @@ class AnimalTests(TestCase):
             nom="Mina",
             espece="chat",
             sexe="femelle",
-            image="images/cat2.jpg",
+            image="asset/cat2.jpg",
         )
 
         response = self.client.get(reverse("blog:animal_list"))
 
-        self.assertContains(response, 'src="/static/images/cat2.jpg"')
+        self.assertContains(response, 'src="/static/asset/cat2.jpg"')
 
     def test_fiche_affiche_les_caracteristiques_de_l_animal(self):
         animal = self.creer_animal()
@@ -51,7 +51,7 @@ class AnimalTests(TestCase):
         self.assertContains(response, "Moyenne")
         self.assertContains(response, "Doré")
         self.assertContains(response, "Mâle")
-        self.assertContains(response, 'src="/static/images/chien1.avif"')
+        self.assertContains(response, 'src="/static/asset/chien1.avif"')
 
     def test_espece_non_pris_en_charge_non_visible(self):
         self.creer_animal(nom="Pistache", espece="nac")
@@ -91,7 +91,7 @@ class AnimalTests(TestCase):
                 "couleur": "Grise",
                 "race": "Européen",
                 "sexe": "femelle",
-                "image": "images/cat2.jpg",
+                "image": "asset/cat2.jpg",
                 "situation": "cession",
             },
         )
@@ -101,7 +101,7 @@ class AnimalTests(TestCase):
             response, reverse("blog:animal_detail", args=[animal.pk])
         )
         self.assertEqual(animal.situation, "cession")
-        self.assertEqual(animal.image, "images/cat2.jpg")
+        self.assertEqual(animal.image, "asset/cat2.jpg")
 
     def test_formulaire_refuse_une_espece_non_autorisee(self):
         nombre_animaux = Animal.objects.count()
@@ -148,7 +148,7 @@ class AnimalTests(TestCase):
                 "couleur": "Grise",
                 "race": "Européen",
                 "sexe": "femelle",
-                "image": "images/chien1.avif",
+                "image": "asset/chien1.avif",
                 "situation": "cession",
             },
         )

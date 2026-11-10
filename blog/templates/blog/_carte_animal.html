@@ -1,4 +1,5 @@
 {% load static %}
+<!-- Petite carte reutilisee sur l'accueil et sur la liste -->
 <article class="card animal-card animal-{{ animal.espece }}">
     <a href="{{ animal.get_absolute_url }}">
         <img src="{% static animal.image %}" alt="{{ animal.nom }}">

@@ -15,7 +15,7 @@ Les annonces sont enregistrées dans la base SQLite du projet.
 - `/proposer/` : enregistrer une annonce pour un chien ou un chat
 - `/admin/` : gérer les animaux avec l'administration Django
 
-Choisis une photo parmi les images disponibles dans `refuge-animaux/images` quand tu proposes
+Choisis une photo parmi les images du dossier `static/asset/` quand tu proposes
 un animal. Les annonces proposées depuis le formulaire sont publiées directement. Pour retirer une
 annonce, l'administrateur peut décocher « disponible à l'adoption » dans l'administration.
 
@@ -71,6 +71,7 @@ python manage.py test blog
 - `blog/templates/blog/` : pages HTML de l'application
 - `templates/base.html` : structure commune des pages
 - `static/css/style.css` : mise en forme
+- `static/asset/` : photos des chiens et des chats
 - `blog/admin.py` : affichage et gestion des animaux dans l'administration
 - `blog/migrations/` : évolutions de la structure de la base de données
 - `templates/requirements.txt` : dépendances Python du projet

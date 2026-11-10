@@ -1,3 +1,4 @@
+/* Couleurs du site. On les reutilise avec var(--corail), etc. */
 :root {
     --corail: #f26b4a;
     --corail-fonce: #d45334;
@@ -129,6 +130,16 @@ button:hover {
     min-height: 220px;
     padding: 1.5rem;
     box-shadow: 0 20px 50px rgba(242, 107, 74, 0.12);
+}
+
+/* Photo de la banniere d'accueil (fichier dans static/asset) */
+.hero-photo {
+    display: block;
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 16px;
+    margin-bottom: 1rem;
 }
 
 .hero-card p {

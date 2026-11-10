@@ -2,12 +2,16 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    <!-- Informations lues par le navigateur, pas affichées dans la page -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}Super Animaux{% endblock %}</title>
+    <!-- Feuille de style commune à toutes les pages -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
+
+    <!-- ===== MENU DU HAUT ===== -->
     <header>
         <a class="logo" href="{% url 'blog:accueil' %}">Super Animaux</a>
         <nav>
@@ -19,10 +23,12 @@
         </nav>
     </header>
 
+    <!-- ===== CONTENU DE LA PAGE (change selon la page) ===== -->
     <main>
         {% block content %}{% endblock %}
     </main>
 
+    <!-- ===== PIED DE PAGE ===== -->
     <footer>
         <div>
             <strong>Super Animaux</strong>
@@ -35,5 +41,6 @@
             <a href="{% url 'blog:comment_ca_marche' %}">Comment ça marche</a>
         </nav>
     </footer>
+
 </body>
 </html>
